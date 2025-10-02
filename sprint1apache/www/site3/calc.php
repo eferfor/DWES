@@ -33,7 +33,7 @@
 
     <h3>Resultado:</h3>
     <?php
-        //if(isset($_POST["numero1"]) && isset($_POST["numero2"])){
+        if(!empty($_POST["numero1"]) && !empty($_POST["numero2"])){
             
             $v_operacion = $_POST["operacion"];
             $resultado;
@@ -56,9 +56,9 @@
             
             echo $resultado;
 
-        //}else{
-        //    echo "Te falta introducir algún número.";
-        //}
+        }else{
+            echo "Te falta introducir algún número.";
+        }
 
     ?>
 
