@@ -41,8 +41,6 @@
         }else{
             echo "Indica de qué tipo es la temperatura.";
         }
-        $cantidad;
-
     ?>
 
 </body>
