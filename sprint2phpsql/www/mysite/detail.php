@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ES">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
     <h2>Comentarios</h2>
     <ul>
     <?php
-        $query2 = 'SELECT * FROM tComentarios WHERE id='.$cancion_id;
+        $query2 = 'SELECT * FROM tComentarios WHERE cancion_id='.$cancion_id;
         $result2 = mysqli_query($db, $query2) or die('Query error');
 
         while($row = mysqli_fetch_array($result2)){
@@ -50,11 +50,11 @@
     </ul>
 
     <div class="formCom">
-        <p class="left">Deja un nuevo comentario:</p>
+        <p>Deja un nuevo comentario:</p>
         <form action="/comment.php" method="post">
-            <textarea rows="4" cols="40" name="new_comment"></textarea>
+            <textarea class="left" rows="4" cols="40" name="new_comment"></textarea>
             <input type="hidden" name="cancion_id" value="<?php echo $cancion_id; ?>">
-            <input class="button" type="submit" value="Comentar">
+            <div><input class="button" type="submit" value="Comentar"></div>
         </form>
     </div>
     
