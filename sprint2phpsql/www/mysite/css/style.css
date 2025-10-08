@@ -54,6 +54,19 @@ div.back{
     width: 40%;
 }
 
-p.back{
+.left{
     text-align: left;
+}
+
+.formCom{
+    width: 40%;
+    margin: 40px auto;
+}
+
+.button{
+    background-color: black;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: none;
 }

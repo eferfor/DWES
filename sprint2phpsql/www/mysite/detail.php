@@ -14,7 +14,7 @@
     ?>
     
     <div class="back">
-        <p class="back"><a href="main.php">Volver</a></p>
+        <p class="left"><a href="main.php">Volver</a></p>
     </div>
 
     <?php
@@ -48,6 +48,15 @@
         mysqli_close($db);
     ?>
     </ul>
+
+    <div class="formCom">
+        <p class="left">Deja un nuevo comentario:</p>
+        <form action="/comment.php" method="post">
+            <textarea rows="4" cols="40" name="new_comment"></textarea>
+            <input type="hidden" name="cancion_id" value="<?php echo $cancion_id; ?>">
+            <input class="button" type="submit" value="Comentar">
+        </form>
+    </div>
     
 </body>
 </html>
