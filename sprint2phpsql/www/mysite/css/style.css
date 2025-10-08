@@ -44,6 +44,12 @@ li{
     list-style: disc inside;
 }
 
+.fecha{
+    font-size: 10pt;
+    display: inline;
+    color: lightslategrey;
+}
+
 a{
     color: black;
     text-decoration-line: none;

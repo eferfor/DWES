@@ -63,12 +63,13 @@ CREATE TABLE `tComentarios` (
   `comentario` varchar(2000) DEFAULT NULL,
   `usuario_id` int(11) DEFAULT NULL,
   `cancion_id` int(11) NOT NULL,
+  `fecha` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`),
   KEY `cancion_id` (`cancion_id`),
   CONSTRAINT `tComentarios_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `tUsuarios` (`id`),
   CONSTRAINT `tComentarios_ibfk_2` FOREIGN KEY (`cancion_id`) REFERENCES `tCanciones` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,13 +80,18 @@ LOCK TABLES `tComentarios` WRITE;
 /*!40000 ALTER TABLE `tComentarios` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `tComentarios` VALUES
-(1,'Olivia transmite mucha autenticidad.',1,1),
-(2,'Esta canción me pone de buen humor.',2,2),
-(3,'El ritmo es tan pegadizo que no puedo dejar de bailarlo.',3,3),
-(4,'Me encanta, suena como una historia contada en música.',4,4),
-(5,'Puro pop.',5,5),
-(6,'La producción es suave pero elegante, perfecta para una tarde tranquila.',3,2),
-(7,'Chapell Roan tiene un estilo único.',4,3);
+(1,'Olivia transmite mucha autenticidad.',1,1,'2025-10-07'),
+(2,'Esta canción me pone de buen humor.',2,2,'2025-10-07'),
+(3,'El ritmo es tan pegadizo que no puedo dejar de bailarlo.',3,3,'2025-10-07'),
+(4,'Me encanta, suena como una historia contada en música.',4,4,'2025-10-07'),
+(5,'Puro pop.',5,5,'2025-10-07'),
+(6,'La producción es suave pero elegante, perfecta para una tarde tranquila.',3,2,'2025-10-07'),
+(7,'Chapell Roan tiene un estilo único.',4,3,'2025-10-07'),
+(8,'Test',NULL,1,'2025-10-08'),
+(9,'Hola',NULL,1,'2025-10-08'),
+(10,'Probando',NULL,1,'2025-10-08'),
+(11,'Comentario nuevo',NULL,3,'2025-10-08'),
+(12,'Prueba comentario con fecha.',NULL,5,'2025-10-08');
 /*!40000 ALTER TABLE `tComentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -134,4 +140,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-10-06 11:50:40
+-- Dump completed on 2025-10-08 13:41:53
