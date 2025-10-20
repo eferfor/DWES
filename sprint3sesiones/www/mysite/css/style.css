@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1.cabecera{
+    margin: 40px;
+    font-size: 40pt;
+}
+
+h1.titulo{
+    margin: 5px;
+    font-size: 20pt;
+}
+
+.caratula{
+    width: 256px;
+    height: 256px;
+}
+
+.info{
+    margin: 0 auto 40px auto;
+}
+
+.campo{
+    display: inline;
+    padding: 1px;
+    color: lightslategray;
+}
+
+.data{
+    display: inline;
+    padding: 1px;
+    font-weight:500;
+}
+
+ul{
+    margin: 10px auto;
+}
+
+li{
+    list-style: disc inside;
+}
+
+.fecha{
+    font-size: 10pt;
+    display: inline;
+    color: lightslategrey;
+}
+
+a{
+    color: black;
+    text-decoration-line: none;
+}
+
+div.back{
+    margin: 20px auto;
+    width: 40%;
+}
+
+.left{
+    text-align: left;
+}
+
+.formCom{
+    width: 40%;
+    margin: 40px auto;
+}
+
+.button{
+    background-color: black;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: none;
+}
