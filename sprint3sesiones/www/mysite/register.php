@@ -13,7 +13,6 @@
         echo '<p>Debes rellenar todos los campos</p>';
     }else if($password1_posted != $password2_posted){
         echo '<p>Las contraseñas no coinciden</p>';
-        // Volver y limpiar formulario?
 
     }else{
         $query_checkemail = $db->prepare("SELECT id FROM tUsuarios WHERE email = ?");

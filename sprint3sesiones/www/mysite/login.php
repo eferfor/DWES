@@ -4,13 +4,17 @@
     $email_posted = $_POST['f_email'];
     $password_posted = $_POST['f_password'];
 
-    $query = "SELECT id, contraseña FROM tUsuarios WHERE email = '".$email_posted."'";
-    $result = mysqli_query($db, $query) or die('Query error');
+    $query = $db->prepare("SELECT id, contraseña FROM tUsuarios WHERE email = ?");
+    $query->bind_param("s", $email_posted);
+    $query->execute();
+    
+    $result = $query->get_result();
     if(mysqli_num_rows($result) > 0){
-        $only_row = mysqli_fetch_array($result);
-        if($only_row[1] == $password_posted) {
+        $only_row = $result->fetch_array();
+        if(password_verify($password_posted, $only_row[1])) {
             session_start();
             $_SESSION['user_id'] = $only_row[0];
+            $query->close();
             header('Location: main.php');
         }else{
             echo '<p>Contraseña incorrecta</p>';

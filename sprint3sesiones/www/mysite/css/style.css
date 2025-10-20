@@ -78,5 +78,6 @@ div.back{
 }
 
 form > input{
-    margin: 4px auto;
+    margin: 8px auto;
+    display: block;
 }
