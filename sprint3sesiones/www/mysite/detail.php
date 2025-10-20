@@ -23,9 +23,11 @@
         }
 
         $cancion_id = $_GET['cancion_id'];
-        $query = 'SELECT * FROM tCanciones WHERE id='.$cancion_id;
-        $result = mysqli_query($db, $query) or die('Query error');
-        $only_row = mysqli_fetch_array($result);
+        $query = $db->prepare('SELECT * FROM tCanciones WHERE id= ?');
+        $query->bind_param("i", $cancion_id);
+        $query->execute();
+        $result = $query->get_result() or die('Query error');
+        $only_row = $result->fetch_array();
         echo '<h1 class="titulo">'.$only_row['nombre'].'</h1>';
         echo '<img src="'.$only_row['url_imagen'].'" class="caratula">';
         echo '<div class="info">';
@@ -36,18 +38,35 @@
     ?>
     
     <h2>Comentarios</h2>
-    <ul>
+    <div class="listaComentarios">
     <?php
-        $query2 = 'SELECT * FROM tComentarios WHERE cancion_id='.$cancion_id;
-        $result2 = mysqli_query($db, $query2) or die('Query error');
+        $query2 = $db->prepare('SELECT * FROM tComentarios WHERE cancion_id= ?');
+        $query2->bind_param("i", $cancion_id);
+        $query2->execute();
+        $result2 = $query2->get_result() or die('Query error');
 
-        while($row = mysqli_fetch_array($result2)){
-            echo '<li>'.$row['comentario'].' <p class="fecha">'.$row['fecha'].'</p></li>';
+        while($row = $result2->fetch_array()){
+            echo '<div class="userComment">';
+            
+            if($row['usuario_id'] != NULL){
+
+                $user_id = $row['usuario_id'];
+                $query3 = $db->prepare('SELECT * FROM tUsuarios WHERE id = ?');
+                $query3->bind_param("i", $user_id);
+                $query3->execute();
+                $result3 = $query3->get_result() or die('Query error');
+                $user_row = $result3->fetch_array();
+
+                echo '<p class="left user">'.$user_row['nombre'].' '.$user_row['apellidos'].':</p>';
+            }
+            
+            echo '<p class="left">'.$row['comentario'].' <span class="fecha">'.$row['fecha'].'</span></p>';
+            echo '</div>';
         }
 
         mysqli_close($db);
     ?>
-    </ul>
+    </div>
 
     <div class="formCom">
         <p>Deja un nuevo comentario:</p>

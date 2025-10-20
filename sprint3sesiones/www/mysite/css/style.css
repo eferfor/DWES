@@ -36,12 +36,9 @@ h1.titulo{
     font-weight:500;
 }
 
-ul{
+div.listaComentarios{
     margin: 10px auto;
-}
-
-li{
-    list-style: disc inside;
+    width: fit-content;
 }
 
 .fecha{
@@ -58,6 +55,10 @@ a{
 div.back{
     margin: 20px auto;
     width: 40%;
+}
+
+.user{
+    font-weight: bold;
 }
 
 .left{
@@ -80,4 +81,9 @@ div.back{
 form > input{
     margin: 8px auto;
     display: block;
+}
+
+.userComment{
+    margin: 3em auto;
+    line-height: 1em;
 }
