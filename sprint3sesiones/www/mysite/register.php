@@ -16,8 +16,12 @@
         // Volver y limpiar formulario?
 
     }else{
-        $query_checkemail = "SELECT id FROM tUsuarios WHERE email = '".$email_posted."'";
-        $result = mysqli_query($db, $query_checkemail) or die('Query error');
+        $query_checkemail = $db->prepare("SELECT id FROM tUsuarios WHERE email = ?");
+        $query_checkemail->bind_param("s", $email_posted);
+        $query_checkemail->execute();
+
+        $result = $query_checkemail->get_result();
+
         if(mysqli_num_rows($result) > 0){
             echo '<p>Ya existe un usuario con ese email</p>';
         }else{
