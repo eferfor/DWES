@@ -13,6 +13,12 @@
         $db = mysqli_connect('localhost', 'root', '1234', 'mysitedb') or die('Fail');
     ?>
     
+    <header>
+        <div class="logout">
+            <div class="button"><a href="./logout.php">Cerrar sesión</a></div>
+        </div>
+    </header>
+
     <div class="back">
         <p class="left"><a href="main.php">Volver</a></p>
     </div>

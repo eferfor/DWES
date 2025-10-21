@@ -12,6 +12,13 @@
         ini_set('display_errors', 1);
         $db = mysqli_connect('localhost', 'root', '1234', 'mysitedb') or die('Fail');
     ?>
+
+    <header>
+        <div class="logout">
+            <div class="button"><a href="./logout.php">Cerrar sesión</a></div>
+        </div>
+    </header>
+
     <h1 class="cabecera">Lista de canciones</h1>
     <?php
         $query = 'SELECT * FROM tCanciones';

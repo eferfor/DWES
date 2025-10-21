@@ -5,6 +5,17 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+header{
+    height: fit-content;
+    padding: 10px 20px;
+    border-bottom: 1px solid darkgray;
+}
+
+.logout{
+    width: fit-content;
+    margin: auto 0 auto auto;
+}
+
 h1.cabecera{
     margin: 40px;
     font-size: 40pt;
@@ -76,6 +87,10 @@ div.back{
     padding: 4px 10px;
     border-radius: 16px;
     border: none;
+}
+
+.button > a{
+    color: white;
 }
 
 form > input{
