@@ -26,7 +26,7 @@
         }else{
             $query_createuser = $db->prepare("INSERT INTO tUsuarios (nombre, apellidos, email, contraseña) VALUES (?, ?, ?, ?)");
             $query_createuser->bind_param("ssss", $name_posted, $lastname_posted, $email_posted, password_hash($password1_posted, PASSWORD_DEFAULT));
-            $query_changepass->execute();
+            $query_createuser->execute();
             
             mysqli_close($db);
             header("Location: main.php");
