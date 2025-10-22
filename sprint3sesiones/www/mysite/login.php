@@ -22,5 +22,5 @@
     }else{
         echo '<p>Usuario no encontrado con ese email</p>';
     }
-
+    $query->close();
 ?>

@@ -1,19 +1,39 @@
-body{
+*{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body{
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 header{
-    height: fit-content;
+    position: relative;
+    height: 50px;
     padding: 10px 20px;
     border-bottom: 1px solid darkgray;
 }
 
-.logout{
+.login{
+    position: absolute;
+    left: 20px;
+    top: 50%;
     width: fit-content;
-    margin: auto 0 auto auto;
+    transform: translateY(-50%);
+}
+
+.login p > span{
+    margin: auto 10px;
+}
+
+.logout{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    width: fit-content;
+    transform: translateY(-50%);
 }
 
 h1.cabecera{
@@ -26,9 +46,28 @@ h1.titulo{
     font-size: 20pt;
 }
 
+section{
+    margin: 50px auto;
+    width: fit-content;
+}
+
+section > .button{
+    margin: 10px auto;
+}
+
 .caratula{
     width: 256px;
     height: 256px;
+    
+}
+
+a > .caratula{
+    opacity: .2;
+    transition: opacity .2s ease-in;
+}
+
+.caratula:hover{
+    opacity: 1;
 }
 
 .info{
@@ -82,11 +121,20 @@ div.back{
 }
 
 .button{
+    width: fit-content;
     background-color: black;
     color: white;
     padding: 4px 10px;
     border-radius: 16px;
     border: none;
+    transition: all .2s ease-in-out;
+    transform-origin: center;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: grey;
+    transform: scale(1.2);
 }
 
 .button > a{
@@ -99,6 +147,10 @@ form > input{
 }
 
 .userComment{
-    margin: 3em auto;
+    margin: 2em auto;
     line-height: 1em;
+}
+
+#messageError{
+    color: red;
 }

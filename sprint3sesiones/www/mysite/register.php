@@ -24,9 +24,9 @@
         if(mysqli_num_rows($result) > 0){
             echo '<p>Ya existe un usuario con ese email</p>';
         }else{
-            
-            $query_createuser = "INSERT INTO tUsuarios (nombre, apellidos, email, contraseña) VALUES ('".$name_posted."', '".$lastname_posted."', '".$email_posted."', '".password_hash($password1_posted, PASSWORD_DEFAULT)."')";
-            $result_newuser = mysqli_query($db, $query_createuser) or die('Query error');
+            $query_createuser = $db->prepare("INSERT INTO tUsuarios (nombre, apellidos, email, contraseña) VALUES (?, ?, ?, ?)");
+            $query_createuser->bind_param("ssss", $name_posted, $lastname_posted, $email_posted, password_hash($password1_posted, PASSWORD_DEFAULT));
+            $query_changepass->execute();
             
             mysqli_close($db);
             header("Location: main.php");

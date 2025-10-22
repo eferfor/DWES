@@ -14,17 +14,44 @@
     ?>
 
     <header>
-        <div class="logout">
-            <div class="button"><a href="./logout.php">Cerrar sesión</a></div>
-        </div>
+        
+        <?php
+            session_start();
+            $user_id_a_insertar = 'NULL';
+            if(!empty($_SESSION['user_id'])){
+                $user_id_a_insertar = $_SESSION['user_id'];
+
+                $queryLog = $db->prepare('SELECT email FROM tUsuarios WHERE id = ?');
+                $queryLog->bind_param("s", $user_id_a_insertar);
+                $queryLog->execute();
+
+                $resultLog = $queryLog->get_result() or die('Query error');
+                $currentUser = $resultLog->fetch_array();
+                $currentEmail = $currentUser[0];
+
+                echo '<div class="login">';
+                echo '<p>Sesión iniciada como: '.$currentEmail;
+                echo '<span class="button"><a href="./newpassword.html">Cambiar contraseña</a></span></p>';
+                echo '</div>';
+
+                echo '<div class="logout">';
+                echo '<div class="button"><a href="./logout.php">Cerrar sesión</a></div>';
+                echo '</div>';
+            }else{
+                echo '<div class="button"><a href="./login.html">Iniciar sesión</a></div>';
+            } 
+        ?>
+    
     </header>
 
     <h1 class="cabecera">Lista de canciones</h1>
     <?php
-        $query = 'SELECT * FROM tCanciones';
-        $result = mysqli_query($db, $query) or die('Query error');
+        $query = $db->prepare('SELECT * FROM tCanciones');
+        $query->execute();
 
-        while($row = mysqli_fetch_array($result)){
+        $result = $query->get_result() or die('Query error');
+
+        while($row = $result->fetch_array()){
             echo '<h1 class="titulo"><a href="detail.php?cancion_id='.$row[0].'">'.$row[1].'</a></h1>';
             echo '<a href="detail.php?cancion_id='.$row[0].'"><img src='.$row[2].' class="caratula"></a>';
             echo '<div class= "info">';

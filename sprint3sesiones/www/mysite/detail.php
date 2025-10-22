@@ -14,9 +14,32 @@
     ?>
     
     <header>
-        <div class="logout">
-            <div class="button"><a href="./logout.php">Cerrar sesión</a></div>
-        </div>
+        <?php
+            session_start();
+            $user_id_a_insertar = 'NULL';
+            if(!empty($_SESSION['user_id'])){
+                $user_id_a_insertar = $_SESSION['user_id'];
+
+                $queryLog = $db->prepare('SELECT email FROM tUsuarios WHERE id = ?');
+                $queryLog->bind_param("s", $user_id_a_insertar);
+                $queryLog->execute();
+
+                $resultLog = $queryLog->get_result() or die('Query error');
+                $currentUser = $resultLog->fetch_array();
+                $currentEmail = $currentUser[0];
+
+                echo '<div class="login">';
+                echo '<p>Sesión iniciada como: '.$currentEmail;
+                echo '<span class="button"><a href="./newpassword.html">Cambiar contraseña</a></span></p>';
+                echo '</div>';
+
+                echo '<div class="logout">';
+                echo '<div class="button"><a href="./logout.php">Cerrar sesión</a></div>';
+                echo '</div>';
+            }else{
+                echo '<div class="button"><a href="./login.html">Iniciar sesión</a></div>';
+            } 
+        ?>
     </header>
 
     <div class="back">

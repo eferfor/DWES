@@ -8,11 +8,19 @@
 </head>
 <body>
     <h1 class="cabecera">Iniciar sesión</h1>
-    <form action="login.php" method="post">
-        <input name="f_email" type="text" placeholder="e-mail">
-        <input name="f_password" type="password" placeholder="Contraseña">
+    <form action="login.php" method="post" id="loginForm">
+        <input name="f_email" type="text" placeholder="e-mail" id="user">
+        <input name="f_password" type="password" placeholder="Contraseña" id="pass">
+        <p id="messageError"></p>
         <input class="button" type="submit" value="Iniciar sesión">
 
     </form>
+
+    <section>
+        <p>¿No tienes cuenta?</p>
+        <div class="button"><a href="./register.html">Regístrate</a></div>
+    </section>
+
+    <script src="./js/login.js"></script>
 </body>
 </html>
