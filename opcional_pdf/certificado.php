@@ -72,6 +72,15 @@
 
         }
 
+        function Footer() {
+            $this->SetY(-15);
+
+            $fecha = "Fecha del diploma: " . date("j") . " de " . date("M") . " del " . date("Y");
+
+            $this->SetFont('Times','I',8);
+            $this->Cell(0,10,$fecha,0,0,'C');
+        }
+
         function PrintChapter(){
             $this->AddPage();
             $this->ChapterBody();
