@@ -16,14 +16,12 @@
 
             $this->Image('./img/marco_a4.jpg', 0, 0, -300);
 
-            // Arial bold 15
+            // Times bold 32
             $this->SetFont('Times','B',32);
-            // Calculamos ancho y posición del título.
+            // Ancho y posición del título.
             $w = $this->GetStringWidth($title)+6;
             $this->SetX((290-$w)/2);
-            // Colores de los bordes, fondo y texto
-            $this->SetDrawColor(0,80,180);
-            $this->SetTextColor(0, 0, 0);
+            
             // Título
             $this->Cell($w,80,$title,0,0,'C');
             // Salto de línea
@@ -34,20 +32,17 @@
 
             $this->AddFont('Parisienne', '', 'Parisienne-Regular.php');
 
-            // Arial 12
+            // Parisienne 42
             $this->SetFont('Parisienne','',42);
-            // Color de fondo
-            $this->SetFillColor(200,220,255);
-            // Título
-            $this->Cell(0,0, iconv("UTF-8", "ISO-8859-16", $nombreCompleto),0,0,'C',true);
-            // Salto de línea
+            $this->Cell(0,0, iconv("UTF-8", "ISO-8859-16", $nombreCompleto),0,0,'C');
             $this->Ln(4);
         }
 
         function ChapterBody(){
-            // Times 12
+            // Times 20
             $this->SetFont('Times','',20);
 
+            // Contenido
             $this->Cell(0,100,'Este certificado se otorga a', 0, 0, 'C');
             $this->Ln(80);
 
@@ -57,11 +52,12 @@
 
             $this->ChapterTitle($nombre." ".$ape1." ".$ape2);
 
-            // Times 12
+            // Times 20
             $this->SetFont('Times','',20);
             $this->Cell(0,40, 'En reconocimiento por haber completado el sprint 3', 0, 0, 'C');
             $this->Ln();
 
+            // Firmas, Times bold 16
             $this->SetFont('Times','B',16);
             $this->Cell(150,40, 'Felipe VI', 0, 0, 'C');
             
@@ -75,8 +71,8 @@
         function Footer() {
             $this->SetY(-15);
 
+            // Fecha, Times italic 8
             $fecha = "Fecha del diploma: " . date("j") . " de " . date("M") . " del " . date("Y");
-
             $this->SetFont('Times','I',8);
             $this->Cell(0,10,$fecha,0,0,'C');
         }
