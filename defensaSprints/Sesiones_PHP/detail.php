@@ -1,6 +1,14 @@
 <?php
 /* Haz que se muestre el id del usuario logueado sin hacer ninguna consulta a la BD*/
 session_start();
+
+$user_id_a_insertar = null;
+  if (!empty($_SESSION['user_id'])) {
+    $user_id_a_insertar = (int) $_SESSION['user_id'];
+  }
+
+echo '<p>Usuario: ' . $user_id_a_insertar . '</p>';
+
 $db = mysqli_connect('localhost', 'root', '1234', 'web_canciones') or die('Fail');
 
 if (!isset($_GET['cancion_id'])) { die('Falta cancion_id'); }
@@ -53,7 +61,7 @@ echo '  <img class="cover" src="' . $song['url_imagen'] . '" alt="cover"><br>';
 /*Consigue que se muestren los comentarios*/
 
 echo '  <h3>Comentarios</h3>';
-while ($row = mysqli_fetch_assoc($res2)) {
+while ($row = $res2->fetch_array()) {
   echo '  <div class="comment">';
   echo '    <p>' . $row[1] . '</p>';
   echo '    <p class="muted">';
@@ -62,6 +70,7 @@ while ($row = mysqli_fetch_assoc($res2)) {
   } else {
     echo 'Anónimo';
   }
+  echo '    <p>' . $row[0] . '</p>';
   
   echo ' — ' . $row[4];
   echo '    </p>';
