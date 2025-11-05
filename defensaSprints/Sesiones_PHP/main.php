@@ -36,21 +36,21 @@ echo '  <h1>Listado de canciones</h1>';
 echo '  <nav>';
 if (!empty($_SESSION['user_id'])) {
  
-  echo '    <a href="/logout.php">Logout</a>';
+  echo '    <a href="/sesiones/logout.php">Logout</a>';
 } else {
-  echo '    <a href="/register.html">Registro</a>';
-  echo '    <a href="/login.html">Login</a>';
+  echo '    <a href="/sesiones/register.html">Registro</a>';
+  echo '    <a href="/sesiones/login.html">Login</a>';
 }
 echo '  </nav>';
 echo '</header>';
 /*Haz que se listen todas las canciones*/
 echo '<div class="list">';
-while () {
-  echo '  <a class="item" href="/detail.php?cancion_id=' .  . '">';
-  echo '    <img class="thumb" src="' . . '" alt="cover">';
+while ($row = mysqli_fetch_assoc($result)) {
+  echo '  <a class="item" href="/sesiones/detail.php?cancion_id=' . $row[0] . '">';
+  echo '    <img class="thumb" src="' . $row[3] . '" alt="cover">';
   echo '    <div>';
-  echo '      <h3 class="title">' .  . '</h3>';
-  echo '      <p class="artist">' .  . '</p>';
+  echo '      <h3 class="title">' . $row[1] . '</h3>';
+  echo '      <p class="artist">' . $row[2] . '</p>';
   echo '    </div>';
   echo '  </a>';
 }

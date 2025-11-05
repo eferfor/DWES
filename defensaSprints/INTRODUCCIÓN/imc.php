@@ -4,6 +4,7 @@
     <p>
     <?php
     /* Haz que el usuario pueda introducir su edad, peso y altura por GET*/
+      
       function calcular_imc($peso, $altura) {
         return $peso / ($altura * $altura);
       }
