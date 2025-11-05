@@ -15,10 +15,10 @@
           echo "Debes seleccionar una conversión.<br>";
         } else {
           
-          if ($conversion == "aF") {
+          if ($conversion == "aFar") {
             $resultado = $cantidad * 9/5 + 32;
             echo $cantidad . " ºC = " . $resultado . " ºF";
-          } else if ($conversion == "aC") {
+          } else if ($conversion == "aCent") {
             $resultado = ($cantidad - 32) * 5/9;
             echo $cantidad . " ºF = " . $resultado . " ºC";
           } else {
@@ -26,9 +26,10 @@
           }
         }
       }
+
     ?>
 
-    <form action="/temperaturas.php" method="post">
+    <form action="/intro/temperaturas.php" method="post">
       <label for="cantidad">Cantidad:</label><br>
       <input type="text" id="cantidad" name="cantidad" ><br>
 
