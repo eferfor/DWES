@@ -14,7 +14,7 @@ $res = mysqli_stmt_get_result($stmt);
 if (mysqli_num_rows($res) > 0) {
   $row = mysqli_fetch_assoc($res);
   /*Comprueba que la contraseña es correcta*/
-  if (password_verify()) {
+  if (password_verify($password_posted, $row[1])) {
     $_SESSION['user_id'] = (int)$row['id'];
     mysqli_stmt_close($stmt);
     mysqli_close($db);
