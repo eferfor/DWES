@@ -11,7 +11,10 @@ if (isset($_POST["op"])) {
   Validar que los operandos no estén vacíos:
   Debe de mostrar  Falta operando 1 o Falta operando 2 según corresponda.
  */
-  if (empty($a)) {
+  if(empty($a) && empty($b)){
+    echo "Faltan los dos operandos.";
+  }
+  else if (empty($a)) {
     echo "Falta el operando A.";
   }else if(empty($b)){
     echo "Falta el operando B.";
@@ -40,7 +43,7 @@ if (isset($_POST["op"])) {
 ?>
 
 
-  <form action="/calc.php" method="post">
+  <form action="/intro/calc.php" method="post">
     <label for="a">Primer número:</label><br>
     <input type="text" id="operando 1" name="a"><br>
 
