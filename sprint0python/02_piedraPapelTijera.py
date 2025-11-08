@@ -11,6 +11,17 @@ reglas = {
 }
 
 def resultado(jugada_usuario, jugada_CPU):
+    """
+    Comprueba quién gana la jugada actual.
+
+    :param jugada_usuario: opción escogida por el usuario
+    :param jugada_CPU: opción escogida por el CPU
+
+    :return:
+    int: 1 si gana el usuario
+    int: 0 hay empate
+    int: -1 si gana el CPU
+    """
     if jugada_CPU in reglas[jugada_usuario]:
         return 1
     elif jugada_usuario in reglas[jugada_CPU]:
@@ -19,6 +30,20 @@ def resultado(jugada_usuario, jugada_CPU):
         return 0
 
 def mejor_de_n(rondas, rondas_usuario, rondas_CPU):
+    """
+    Comprueba el número de rondas ganadas por el usuario
+    y por la CPU y cuando uno sea la mayoría, indica si el
+    usuario gana o pierde.
+
+    :param rondas: número de rondas a jugar
+    :param rondas_usuario: rondas ganadas por el usuario
+    :param rondas_CPU: rondas ganadas por la CPU
+
+    :return:
+    int: 1 si gana el usuario
+    int: -1 si gana el CPU
+    int: 0 si ninguno ganó la mayoría de rondas
+    """
     if rondas_usuario >= rondas//2 + 1:
         print("¡Has ganado!")
         return 1
@@ -30,6 +55,15 @@ def mejor_de_n(rondas, rondas_usuario, rondas_CPU):
         return 0
 
 def jugar(rondas, rondas_usuario, rondas_CPU):
+    """
+    Pide al usuario introducir su jugada, calcula la jugada
+    de la CPU aleatoriamente y comprueba quién gana la ronda
+    y si alguno ganó la partida.
+
+    :param número de rondas a jugar
+    :param rondas_usuario: rondas ganadas por el usuario
+    :param rondas_CPU: rondas ganadas por la CPU
+    """
     estado_partida = 0
     while estado_partida == 0:
         check_jugada = False

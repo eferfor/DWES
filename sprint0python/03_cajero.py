@@ -1,11 +1,17 @@
 cuenta = {"nombre": "Ana", "Saldo": 1200.0}
 
 def consultar_saldo():
+    """
+    Imprime en consola el Saldo de la cuenta
+    """
     print()
     print(f"Saldo actual: {cuenta['Saldo']}")
     print()
 
 def ingresar_dinero():
+    """
+    Pide introducir una cantidad, comprueba que es válida y la añade al Saldo
+    """
     cantidad_ok = False
     while not cantidad_ok:
         try:
@@ -24,6 +30,10 @@ def ingresar_dinero():
             print("Error: Escoge una cantidad numérica")
 
 def retirar_dinero():
+    """
+    Pride introducir una cantidad, comprueba que es válida
+    y menor que el Saldo disponible, y la resta del Saldo
+    """
     cantidad_ok = False
     while not cantidad_ok:
         try:
@@ -63,6 +73,6 @@ while not salir:
             print("¡Chao!")
             salir = True
         else:
-            raise Exception("Opcion invalida")
+            raise Exception("Opción inválida")
     except Exception as e:
         print("Error", e)
