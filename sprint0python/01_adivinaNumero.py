@@ -13,7 +13,7 @@ def adivinaElNumero():
     while(not nivel_valido):
         nivel = input("Escoge una dificultad (fácil, medio o difícil):")
 
-        if nivel == "fácil":
+        if nivel == "fácil" or nivel == "facil":
             print("El número estará entre 1 y 20")
             numero = random.randint(1, 20)
             nivel_valido = True
@@ -21,7 +21,7 @@ def adivinaElNumero():
             print("El número estará entre 1 y 100")
             numero = random.randint(1, 100)
             nivel_valido = True
-        elif nivel == "dificil":
+        elif nivel == "difícil" or nivel == "dificil":
             print("El número estará entre 1 y 1000")
             numero = random.randint(1, 1000)
             nivel_valido = True
@@ -59,17 +59,23 @@ jugar = True
 
 while jugar:
     adivinaElNumero()
-    print("¿Quieres jugar otra vez? (s/n)")
-    respuesta = input()
 
-    try:
-        if respuesta.lower() == "s":
-            continue
-        elif respuesta.lower() == "n":
-            jugar = False
-        else:
-            raise ValueError("Introduce 's' o 'n'")
-    except ValueError as e:
-        print("Error:", e)
+    repetir = False
+
+    while not repetir:
+        print("¿Quieres jugar otra vez? (s/n)")
+        respuesta = input()
+
+        try:
+            if respuesta.lower() == "s":
+                repetir = True
+                continue
+            elif respuesta.lower() == "n":
+                repetir = True
+                jugar = False
+            else:
+                raise ValueError("Introduce 's' o 'n'")
+        except ValueError as e:
+            print("Error:", e)
 
 print("Chao!")
