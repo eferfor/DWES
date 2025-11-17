@@ -37,6 +37,9 @@ def devolver_cancion_por_id(request, id_solicitado):
     resultado = {
         'id': cancion.id,
         'titulo': cancion.nombre,
+        'url_imagen': cancion.url_imagen,
+        'artista': cancion.artista,
+        'album': cancion.album,
         'fecha': cancion.ano,
         'comentarios': lista_comentarios
     }
