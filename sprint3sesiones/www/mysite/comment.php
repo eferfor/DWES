@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-    $db = mysqli_connect('localhost', 'root', '1234', 'mysitedb') or die('Fail');
+    $db = mysqli_connect('172.16.0.2', 'root', '1234', 'mysitedb') or die('Fail');
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 ?>
