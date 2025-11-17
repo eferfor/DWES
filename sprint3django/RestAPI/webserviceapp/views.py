@@ -18,6 +18,9 @@ def devolver_canciones(request):
         diccionario = {}
         diccionario['id'] = fila_sql.id
         diccionario['titulo'] = fila_sql.nombre
+        diccionario['url_imagen'] = fila_sql.url_imagen
+        diccionario['artista'] = fila_sql.artista
+        diccionario['album'] = fila_sql.album
         diccionario['fecha'] = fila_sql.ano
         respuesta_final.append(diccionario)
     return JsonResponse(respuesta_final, safe=False)
