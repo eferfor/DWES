@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
+from django.utils import timezone
 from .models import Tcanciones, Tcomentarios
 import json
 
@@ -32,7 +32,10 @@ def devolver_cancion_por_id(request, id_solicitado):
     for fila_comentario_sql in comentarios:
         diccionario = {}
         diccionario['id'] = fila_comentario_sql.id
+        diccionario['user'] = fila_comentario_sql.usuario_id
+        diccionario['fecha'] = fila_comentario_sql.fecha
         diccionario['comentario'] = fila_comentario_sql.comentario
+
         lista_comentarios.append(diccionario)
     resultado = {
         'id': cancion.id,
@@ -54,5 +57,11 @@ def guardar_comentario(request, cancion_id):
     comentario = Tcomentarios()
     comentario.comentario = json_peticion['nuevo_comentario']
     comentario.cancion = Tcanciones.objects.get(id = cancion_id)
+    comentario.fecha = timezone.now()
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        comentario.usuario_id = user_id
+    else:
+        comentario.usuario_id = None
     comentario.save()
     return JsonResponse({"status": "ok"})
