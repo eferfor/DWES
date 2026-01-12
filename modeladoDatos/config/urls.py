@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from pociones.views import PocionListAPIView, PocionDetailAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/pociones/', PocionListAPIView.as_view()),
+    path('api/pociones/<int:pk>/', PocionDetailAPIView.as_view()),
 ]
