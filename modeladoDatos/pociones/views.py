@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,41 +13,15 @@ class PocionListAPIView(APIView):
         serializer = PocionSerializer(pociones, many=True)
         return Response(serializer.data)
 
+class PocionCreateAPIView(APIView):
     def post(self, request):
-        data = request.data
+        serializer = PocionSerializer(data=request.data)
 
-        pocion = Pocion.objects.create(
-            nombre = data.get('nombre'),
-            precio = data.get('precio'),
-            descripcion = data.get('descripcion'),
-            tamano = data.get('tamano'),
-            bruja_id = data.get('bruja')
-        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
 
-        ingredientes_ids = data.get('ingredientes', [])
-        ingredientes = Ingrediente.objects.filter(id__in = ingredientes_ids)
-        pocion.ingredientes.set(ingredientes)
-
-        lista_ingredientes = []
-        for ingrediente in ingredientes:
-            lista_ingredientes.append({
-                'id': ingrediente.pk,
-                'nombre': ingrediente.nombre,
-                'origen': ingrediente.origen
-            })
-
-        response_data = {
-            'id': pocion.pk,
-            'nombre': pocion.nombre,
-            'precio': pocion.precio,
-            'descripcion': pocion.descripcion,
-            'ingredientes': lista_ingredientes,
-            'tamano': pocion.tamano,
-            'bruja': pocion.bruja.pk
-        }
-
-        return Response(response_data)
-
+        return Response(serializer.errors, status=400)
 
 class PocionDetailAPIView(APIView):
     def get(self, request, pk):

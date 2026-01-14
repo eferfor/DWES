@@ -7,7 +7,7 @@ class IngredienteSerializer(serializers.ModelSerializer):
         fields = ('id', 'nombre', 'origen')
 
 class PocionSerializer(serializers.ModelSerializer):
-    ingredientes = IngredienteSerializer(many=True, read_only=True)
+    ingredientes = serializers.PrimaryKeyRelatedField(queryset=Ingrediente.objects.all(), many=True)
 
     class Meta:
         model = Pocion
@@ -20,3 +20,9 @@ class PocionSerializer(serializers.ModelSerializer):
             'tamano',
             'bruja'
         )
+
+    def create(self, validated_data):
+        ingredientes = validated_data.pop('ingredientes')
+        pocion = Pocion.objects.create(**validated_data)
+        pocion.ingredientes.set(ingredientes)
+        return pocion
