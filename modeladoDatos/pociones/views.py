@@ -51,26 +51,6 @@ class PocionListAPIView(APIView):
 class PocionDetailAPIView(APIView):
     def get(self, request, pk):
         pocion = Pocion.objects.get(pk=pk)
-        ingredientes = pocion.ingredientes.all()
+        serializer = PocionSerializer(pocion)
 
-        lista_ingredientes = []
-        for ingrediente in ingredientes:
-            ing_data = {
-                'id': ingrediente.pk,
-                'nombre': ingrediente.nombre,
-                'origen': ingrediente.origen,
-            }
-
-            lista_ingredientes.append(ing_data)
-
-        data = {
-            'id': pocion.pk,
-            'nombre': pocion.nombre,
-            'precio': pocion.precio,
-            'descripcion': pocion.descripcion,
-            'ingredientes': lista_ingredientes,
-            'tamano': pocion.tamano,
-            'bruja': pocion.bruja.pk
-        }
-
-        return Response(data)
+        return Response(serializer.data)
