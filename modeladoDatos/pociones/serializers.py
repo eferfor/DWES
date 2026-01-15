@@ -26,3 +26,5 @@ class PocionSerializer(serializers.ModelSerializer):
         pocion = Pocion.objects.create(**validated_data)
         pocion.ingredientes.set(ingredientes)
         return pocion
+
+    
