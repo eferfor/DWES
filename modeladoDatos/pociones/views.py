@@ -5,9 +5,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Pocion, Ingrediente
-from .serializers import PocionSerializer
+from .serializers import PocionSerializer, IngredienteSerializer
 
 
 class PocionViewSet(ModelViewSet):
     queryset = Pocion.objects.all()
     serializer_class = PocionSerializer
+
+class IngredienteViewSet(ModelViewSet):
+    queryset = Ingrediente.objects.all()
+    serializer_class = IngredienteSerializer
