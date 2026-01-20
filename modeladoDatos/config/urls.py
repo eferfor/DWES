@@ -17,11 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from pociones.views import PocionViewSet, IngredienteViewSet
+from pociones.views import PocionViewSet, IngredienteViewSet, EfectoViewSet, EspecialidadViewSet, AquelarreViewSet, BrujaViewSet, ClienteViewSet, PedidoViewSet
 
 router = DefaultRouter()
 router.register('pociones', PocionViewSet, basename='pociones')
 router.register('ingredientes', IngredienteViewSet, basename='ingredientes')
+router.register('efectos', EfectoViewSet, basename='efectos')
+router.register('especialidades', EspecialidadViewSet, basename='especialidades')
+router.register('aquelarres', AquelarreViewSet, basename='aquelarres')
+router.register('brujas', BrujaViewSet, basename='brujas')
+router.register('clientes', ClienteViewSet, basename='clientes')
+router.register('pedidos', PedidoViewSet, basename='pedidos')
 
 urlpatterns = [
     path('api/tiendaPociones/', include(router.urls)),

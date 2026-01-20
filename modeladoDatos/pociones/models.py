@@ -3,7 +3,6 @@ from tkinter.constants import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class Efecto(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
@@ -106,16 +105,15 @@ class PocionesPedido(models.Model):
     pocion = models.ForeignKey(Pocion, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
     precio_unidad = models.DecimalField(decimal_places=2, max_digits=10, blank=True, null=True)
+
     class Meta:
         verbose_name_plural = "Pociones Pedidos"
+        models.UniqueConstraint(fields=['pedido', 'pocion'], name='unique_pocion')
 
     def save(self, *args, **kwargs):
         if not self.precio_unidad:
             self.precio_unidad = self.pocion.precio
         super().save(*args, **kwargs)
-
-    class Meta:
-        models.UniqueConstraint(fields=['pedido', 'pocion'], name='unique_pocion')
 
     def __str__(self):
         return f"{self.cantidad} unidades de la poción {self.pocion} en el pedido {self.pedido}"
