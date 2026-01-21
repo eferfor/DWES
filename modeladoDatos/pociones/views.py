@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
+
+from .filters import PocionFilter
 from .models import Pocion, Ingrediente, Efecto, Especialidad, Aquelarre, Bruja, Cliente, Pedido, PocionesPedido
 from .serializers import PocionSerializer, IngredienteSerializer, EfectoSerializer, EspecialidadSerializer, AquelarreSerializer, BrujaSerializer, ClienteSerializer, PedidoSerializer
 
@@ -31,8 +34,10 @@ class ClienteViewSet(ModelViewSet):
 class PocionViewSet(ModelViewSet):
     queryset = Pocion.objects.all()
     serializer_class = PocionSerializer
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['tamano', 'ingredientes']
+    filterset_class = PocionFilter
+    search_fields = ['nombre', 'descripcion']
 
 class IngredienteViewSet(ModelViewSet):
     queryset = Ingrediente.objects.all()
