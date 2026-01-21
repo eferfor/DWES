@@ -1,6 +1,6 @@
 import django_filters
 
-from pociones.models import Pocion
+from pociones.models import Pocion, Efecto
 
 
 class PocionFilter(django_filters.FilterSet):
@@ -18,4 +18,17 @@ class PocionFilter(django_filters.FilterSet):
 
     class Meta:
         model = Pocion
-        fields = ['nombre', 'precio', 'tamano', 'ingredientes']
+        fields = ['nombre', 'tamano', 'ingredientes']
+
+class EfectoFilter(django_filters.FilterSet):
+    nombre = django_filters.CharFilter(
+        lookup_expr='icontains'
+    )
+
+    descripcion = django_filters.CharFilter(
+        lookup_expr='icontains'
+    )
+
+    class Meta:
+        model = Efecto
+        fields = ['nombre', 'descripcion']
