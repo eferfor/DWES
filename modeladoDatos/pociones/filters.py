@@ -18,4 +18,4 @@ class PocionFilter(django_filters.FilterSet):
 
     class Meta:
         model = Pocion
-        fields = ['nombre', 'precio']
+        fields = ['nombre', 'precio', 'tamano', 'ingredientes']
