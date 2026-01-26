@@ -31,4 +31,5 @@ router.register('pedidos', PedidoViewSet, basename='pedidos')
 
 urlpatterns = [
     path('api/tiendaPociones/', include(router.urls)),
+    path('admin/', admin.site.urls),
 ]

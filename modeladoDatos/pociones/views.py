@@ -3,13 +3,17 @@ from rest_framework import status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
+
 from .filters import PocionFilter, EfectoFilter
 from .models import Pocion, Ingrediente, Efecto, Especialidad, Aquelarre, Bruja, Cliente, Pedido, PocionesPedido
-from .serializers import PocionSerializer, IngredienteSerializer, EfectoSerializer, EspecialidadSerializer, AquelarreSerializer, BrujaSerializer, ClienteSerializer, PedidoSerializer
+from .serializers import PocionSerializer, IngredienteSerializer, EfectoSerializer, EspecialidadSerializer, \
+    AquelarreSerializer, BrujaSerializer, ClienteSerializer, PedidoSerializer, VerPedidoSerializer
+
 
 class EfectoViewSet(ModelViewSet):
     queryset = Efecto.objects.all()
@@ -34,6 +38,27 @@ class ClienteViewSet(ModelViewSet):
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
 
+    # Acción: ver pedidos por cliente
+    @action(detail=True, methods=['get'], url_path='pedidos')
+    def pedidos(self, request, pk=None):
+        try:
+            cliente = Cliente.objects.get(pk=pk)
+        except Cliente.DoesNotExist:
+            return Response(
+                {"error": "el cliente no existe"}, status=404
+            )
+
+        pedidos = Pedido.objects.filter(cliente=cliente)
+
+        if not pedidos:
+            return Response(
+                {"error": "el cliente no tiene pedidos"}, status=404
+            )
+
+        serializer = VerPedidoSerializer(pedidos, many=True)
+        return Response(serializer.data)
+
+
 class PocionViewSet(ModelViewSet):
     queryset = Pocion.objects.all()
     serializer_class = PocionSerializer
@@ -55,12 +80,7 @@ class IngredienteViewSet(ModelViewSet):
     ordering_fields = ['nombre']
     ordering = ['id']
 
+
 class PedidoViewSet(ModelViewSet):
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
-
-"""
-class PocionesPedidoViewSet(ModelViewSet):
-    queryset = PocionesPedido.objects.all()
-    serializer_class = PocionesPedidoSerializer
-"""

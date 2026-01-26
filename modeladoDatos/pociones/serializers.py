@@ -79,6 +79,7 @@ class PocionesPedidoSerializer(serializers.ModelSerializer):
         model = PocionesPedido
         fields = ('pocion', 'cantidad')
 
+
 class PedidoSerializer(serializers.ModelSerializer):
     items = PocionesPedidoSerializer(many=True)
 
@@ -98,3 +99,21 @@ class PedidoSerializer(serializers.ModelSerializer):
             )
 
         return pedido
+
+
+# Acción: ver pedidos por cliente
+class VerPocionesPedidoSerializer(serializers.ModelSerializer):
+    pocion_nombre = serializers.CharField(source='pocion.nombre', read_only=True)
+
+    class Meta:
+        model = PocionesPedido
+        fields = ('pocion', 'pocion_nombre', 'cantidad', 'precio_unidad')
+
+
+class VerPedidoSerializer(serializers.ModelSerializer):
+    items = VerPocionesPedidoSerializer(many=True, read_only=True)
+    precio_total = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
+
+    class Meta:
+        model = Pedido
+        fields = ('id', 'fecha', 'items', 'precio_total')
