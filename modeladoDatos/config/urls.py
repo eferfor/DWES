@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from pociones.views import PocionViewSet, IngredienteViewSet, EfectoViewSet, EspecialidadViewSet, AquelarreViewSet, BrujaViewSet, ClienteViewSet, PedidoViewSet
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
 
 router = DefaultRouter()
 router.register('pociones', PocionViewSet, basename='pociones')
@@ -32,4 +33,6 @@ router.register('pedidos', PedidoViewSet, basename='pedidos')
 urlpatterns = [
     path('api/tiendaPociones/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('api/token/refresh/', TokenRefreshView.as_view()),
 ]
