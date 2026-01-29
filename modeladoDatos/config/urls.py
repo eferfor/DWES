@@ -33,6 +33,7 @@ router.register('pedidos', PedidoViewSet, basename='pedidos')
 urlpatterns = [
     path('api/tiendaPociones/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
 ]
